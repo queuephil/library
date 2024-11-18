@@ -1,0 +1,95 @@
+/* reset CSS */
+
+body {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.5;
+}
+  
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+  
+    outline: none;
+  
+    font-size: 1rem;
+
+    /* border: 1px solid red; */
+}
+/* style the library */
+
+:root {
+    --accent: lightsteelblue;
+    --lightgray: rgba(0, 0, 0, 0.1);
+    --shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    padding: 1rem;
+    background-color: var(--accent);
+}
+
+h2 {
+    font-size: 1.5rem;
+    background-color: var(--accent);
+    border-radius: 1rem 1rem 0 0;
+    min-height: 5rem;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 20rem);
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.book {
+    display: grid;
+    text-align: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid white;
+}
+
+form {
+    display: grid;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.input {
+    display: grid;
+    grid-template-columns: auto 20rem;
+    text-align: end;
+    gap: 1rem;
+}
+
+input[type = text] {
+    background-color: var(--lightgray);
+    border-radius: 1rem;
+    padding: 0 0.5rem;
+}
+
+input[type = submit], .button {
+    background-color: var(--accent);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin: 0 1rem;
+}
+
+header {
+    box-shadow: var(--shadow);
+}
+
+.radio {
+    display: flex;
+    justify-content: center;
+}
