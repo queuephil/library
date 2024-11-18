@@ -78,7 +78,7 @@ input[type = text] {
     padding: 0 0.5rem;
 }
 
-input[type = submit], .button {
+input[type = submit], .markReadButton, .removeBookButton {
     background-color: var(--accent);
     padding: 0.5rem;
     border-radius: 1rem;

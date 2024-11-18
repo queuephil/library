@@ -11,56 +11,51 @@ function Book(title, author, pages, read) {
 
 // add new Book-Object to the library-array
 function addBookToLibrary(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+    myLibrary.push(new Book(title, author, pages, read));
 }
 
 // display the books of the library in the HTML
 const library = document.querySelector(".library");
 function displayBooks() {
-    for(let i = 0; i < myLibrary.length; i++) {
+    library.innerHTML = ""; // clear the library
+    myLibrary.forEach((bookData, index) => {
         const book = document.createElement("div");
-        book.classList = "book";
-                
-            const bookTitle = document.createElement("H2");
-            const bookAuthor = document.createElement("div");
-            const bookPages = document.createElement("div");
-            const bookRead = document.createElement("div");
-            const markReadButton = document.createElement("div");
-            const removeBookButton = document.createElement("div");
-            
-            bookTitle.textContent = myLibrary[i].title;
-            bookAuthor.textContent = `by ${myLibrary[i].author}`;
-            bookPages.textContent = `${myLibrary[i].pages} pages`;
-            bookRead.textContent = myLibrary[i].read;
-            markReadButton.textContent = (myLibrary[i].read == "read") ? "Mark unread":"Mark read";
-            markReadButton.classList = "button";
-            removeBookButton.textContent = "Remove";
-            removeBookButton.classList = "button";
-            
-            function appendChilds(parent) {
-                parent.appendChild(bookTitle);
-                parent.appendChild(bookAuthor);
-                parent.appendChild(bookPages);
-                parent.appendChild(bookRead);
-                parent.appendChild(markReadButton);
-                parent.appendChild(removeBookButton);
+        book.classList.add("book");
+    
+        const elements = [
+            { tag: "h2", text: bookData.title },
+            { tag: "div", text: `by ${bookData.author}` },
+            { tag: "div", text: `${bookData.pages} pages` },
+            { tag: "div", text: bookData.read },
+            { tag: "div", className: "markReadButton", text: bookData.read === "read" ? "Mark unread" : "Mark read" },
+            { tag: "div", className: "removeBookButton", text: "Remove" },
+        ];
+    
+        elements.forEach(({ tag, className, text }) => {
+            const element = document.createElement(tag);
+            element.textContent = text;
+    
+            if (className) element.classList.add(className);
+    
+            if (className === "markReadButton") {
+                element.addEventListener("click", () => {
+                    bookData.read = bookData.read === "read" ? "unread" : "read";
+                    displayBooks();
+                });
             }
-            appendChilds(book);
-            
-            markReadButton.addEventListener("click", () => {
-                (myLibrary[i].read == "read") ? myLibrary[i].read = "unread":myLibrary[i].read = "read";
-                library.innerHTML = ""; // clear the library
-                displayBooks(); // repopulate the library
-            });
-
-            removeBookButton.addEventListener("click", () => {
-                console.log(i);
-                myLibrary.splice(i, 1);
-                library.innerHTML = ""; // clear the library
-                displayBooks(); // repopulate the library
-            });
+    
+            if (className === "removeBookButton") {
+                element.addEventListener("click", () => {
+                    myLibrary.splice(index, 1);
+                    displayBooks();
+                });
+            }
+    
+            book.appendChild(element);
+        });
+    
         library.appendChild(book);
-    }
+    });    
 }    
     
 // add a button to add a book
